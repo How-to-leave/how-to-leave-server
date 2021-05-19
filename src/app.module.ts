@@ -6,7 +6,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import * as Joi from '@hapi/joi';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { CountriesModule } from './countries/countries.module';
+
 @Module({
   imports: [
     DatabaseModule,
@@ -22,6 +23,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       }),
     }),
     UsersModule,
+    CountriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
