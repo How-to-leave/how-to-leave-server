@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CountryEntity } from './entities/country.entity';
 import { CountryInput } from './inputs/country.input';
 
@@ -11,6 +11,14 @@ export class CountriesService {
     private readonly countriesRepository: Repository<CountryEntity>,
   ) {}
 
+  async getCountries(): Promise<CountryEntity[]> {
+    return await this.countriesRepository.find();
+  }
+
+  async getCountryById(id: string): Promise<CountryEntity> {
+    return await this.countriesRepository.findOne(id);
+  }
+
   async createCountry(data: CountryInput): Promise<CountryEntity> {
     const country = await this.countriesRepository.save({
       name: data.name,
@@ -20,11 +28,14 @@ export class CountriesService {
     return country;
   }
 
-  async getCountries(): Promise<CountryEntity[]> {
-    return await this.countriesRepository.find();
+  async updateCountry(id: string, data: CountryInput): Promise<CountryEntity> {
+    await this.countriesRepository.update(id, data);
+    return await this.countriesRepository.findOne(id);
   }
 
-  async getCountryById(id: string): Promise<CountryEntity> {
-    return await this.countriesRepository.findOne(id);
+  async daleteCountry(id: string): Promise<CountryEntity> {
+    const country = await this.countriesRepository.findOne(id);
+    await this.countriesRepository.delete(id);
+    return country;
   }
 }

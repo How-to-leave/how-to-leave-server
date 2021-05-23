@@ -3,6 +3,7 @@ import { CountryDto } from './dto/country.dto';
 import { CountryEntity } from './entities/country.entity';
 import { CountryInput } from './inputs/country.input';
 import { CountriesService } from './countries.service';
+import { DeleteResult } from 'typeorm';
 
 @Resolver(() => CountryEntity)
 export class CountriesResolver {
@@ -31,5 +32,20 @@ export class CountriesResolver {
     // } else {
     // return user;
     // }
+  }
+
+  @Mutation(() => CountryDto)
+  async updateCountry(
+    @Args('uid', { type: () => ID }) uid: string,
+    @Args('input') input: CountryInput,
+  ): Promise<CountryDto> {
+    return this.countriesService.updateCountry(uid, input);
+  }
+
+  @Mutation(() => CountryDto)
+  async deleteCountry(
+    @Args('uid', { type: () => ID }) uid: string,
+  ): Promise<CountryDto> {
+    return this.countriesService.daleteCountry(uid);
   }
 }

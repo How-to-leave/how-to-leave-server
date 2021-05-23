@@ -1,7 +1,7 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Index,
+  // Index,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -10,7 +10,6 @@ import {
 
 @Entity('countries')
 export class CountryEntity {
-  @Index()
   @PrimaryGeneratedColumn('uuid')
   uid: string;
 

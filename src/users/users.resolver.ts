@@ -30,4 +30,19 @@ export class UsersResolver {
     // return user;
     // }
   }
+
+  @Mutation(() => UserDto)
+  async updateUser(
+    @Args('uid', { type: () => ID }) uid: string,
+    @Args('input') input: UserInput,
+  ): Promise<UserDto> {
+    return this.usersService.updateUser(uid, input);
+  }
+
+  @Mutation(() => UserDto)
+  async deleteUser(
+    @Args('uid', { type: () => ID }) uid: string,
+  ): Promise<UserDto> {
+    return this.usersService.daleteUser(uid);
+  }
 }
