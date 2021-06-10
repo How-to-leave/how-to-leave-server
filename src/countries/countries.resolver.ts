@@ -3,7 +3,6 @@ import { CountryDto } from './dto/country.dto';
 import { CountryEntity } from './entities/country.entity';
 import { CountryInput } from './inputs/country.input';
 import { CountriesService } from './countries.service';
-import { DeleteResult } from 'typeorm';
 
 @Resolver(() => CountryEntity)
 export class CountriesResolver {
